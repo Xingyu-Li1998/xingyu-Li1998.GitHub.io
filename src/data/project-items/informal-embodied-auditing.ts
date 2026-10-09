@@ -1,5 +1,5 @@
 import type { Project } from "../projects";
-import coverImage from "../../assets/images/informal-embodied-auditing/cover2.png";
+import coverImage from "../../assets/images/informal-embodied-auditing/Cover2.png";
 
 export const informalEmbodiedAuditing: Project = {
   workInProgress: true,

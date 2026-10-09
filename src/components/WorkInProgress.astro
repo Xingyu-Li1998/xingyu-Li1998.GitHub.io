@@ -1,0 +1,32 @@
+---
+import "../styles/work-in-progress.css";
+
+interface Props {
+  paperUrl?: string;
+}
+
+const { paperUrl } = Astro.props;
+---
+
+<div class="work-in-progress">
+  <p aria-label="Work in Progress ......">
+    <span class="work-in-progress-title" aria-hidden="true">Work in Progress ......</span>
+  </p>
+  <p class="work-in-progress-paper-row">
+    {paperUrl ? (
+      <a href={paperUrl} target="_blank" rel="noopener noreferrer" aria-label="Check Our Paper">
+        <span class="work-in-progress-paper" aria-hidden="true">Check Our Paper ↗</span>
+      </a>
+    ) : (
+      <span aria-label="Check Our Paper">
+        <span class="work-in-progress-paper" aria-hidden="true">Check Our Paper ↗</span>
+      </span>
+    )}
+    <svg class="work-in-progress-dino" viewBox="3 7 42 42" aria-hidden="true" shape-rendering="crispEdges">
+      <g class="wip-playful-dino">
+        <path fill="currentColor" d="M28 17h12v3h3v8H32v3h5v3h-3v-1h-2v3h3v3h-3v3h8v3H18v-3h-6v-3H8v-3H5v-6h3v3h4v3h7v-6h5v-6h4z" />
+        <path fill="white" d="M35 19h3v3h-3zM26 37h3v5h-3z" />
+      </g>
+    </svg>
+  </p>
+</div>

@@ -1,0 +1,97 @@
+---
+import type { InfoGroup } from "../data/info-records";
+import "../styles/info-records.css";
+
+interface Props {
+  title: string;
+  groups: InfoGroup[];
+  profileUrl?: string;
+  variant?: "default" | "timeline" | "publications" | "teaching" | "press" | "education";
+}
+
+const { title, groups, profileUrl, variant = "default" } = Astro.props;
+const legend =
+  variant === "publications"
+    ? { solid: "Published", hollow: "In progress" }
+    : variant === "teaching"
+      ? { solid: "Finished", hollow: "Ongoing" }
+      : variant === "press"
+        ? { solid: "Finished", hollow: "Coming" }
+        : undefined;
+---
+
+<section
+class:list={[
+  "info-record-section",
+  (variant === "timeline" ||
+    variant === "publications" ||
+    variant === "teaching" ||
+    variant === "press") &&
+    "info-record-section--timeline",
+  variant === "publications" && "info-record-section--publications",
+  variant === "teaching" && "info-record-section--teaching",
+  variant === "press" && "info-record-section--press",
+  variant === "education" && "info-record-section--education",
+]}
+>
+  <div class="info-record-heading">
+      <div class="info-record-heading-title">
+        <h2>{title}</h2>
+
+        {legend && (
+          <span class="info-status-legend">
+            <span>[●] {legend.solid}</span>
+            <span>[○] {legend.hollow}</span>
+          </span>
+        )}
+      </div>
+      {profileUrl && (
+        <a class="info-profile-link" href={profileUrl}>
+          <span class="info-profile-marker" aria-hidden="true">→</span>
+          <span class="info-profile-label">Scholar Profile ↗</span>
+        </a>
+      )}
+  </div>
+
+  <div class="info-record-groups">
+    {groups.map((group) => (
+      <div class="info-record-group">
+        {variant !== "education" && <h3>{group.year}</h3>}
+
+        <ul>
+          {group.records.map((record) => (
+                <li data-status={legend ? record.status : undefined}>
+                <div class="info-record-main">
+                  {record.segments.map((segment) =>
+                    segment.url ? (
+                      <a href={segment.url}>{segment.text}</a>
+                    ) : (
+                      <span>{segment.text}</span>
+                    )
+                  )}
+
+                  {variant === "education" && (
+                    <span class="info-education-period">{group.year}</span>
+                  )}
+                </div>
+
+                {record.details?.map((line) => (
+                    <div class="info-record-detail">
+                    {line.map((segment) =>
+                      segment.url ? (
+                        <a href={segment.url}>{segment.text}</a>
+                      ) : segment.italic ? (
+                        <em>{segment.text}</em>
+                      ) : (
+                        <span>{segment.text}</span>
+                      )
+                    )}
+                    </div>
+                ))}
+                </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

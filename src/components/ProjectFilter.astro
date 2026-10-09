@@ -1,0 +1,54 @@
+---
+import "../styles/project-filter.css";
+---
+
+<div class="project-filter" role="group" aria-label="Project filters">
+  <button type="button" data-filter="all" aria-pressed="true">ALL</button>
+  <button type="button" data-filter="selected" aria-pressed="false">SELECTED</button>
+  <button type="button" data-filter="art-show" aria-pressed="false">ART SHOW</button>
+  <button type="button" data-filter="research" aria-pressed="false">RESEARCH</button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(
+    ".project-filter button"
+  );
+
+  const cards = document.querySelectorAll<HTMLElement>(".project-card");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+
+      buttons.forEach((item) => {
+        item.setAttribute("aria-pressed", String(item === button));
+      });
+
+      cards.forEach((card) => {
+        const views = (card.dataset.views ?? "").split(" ");
+
+        if (filter === "all") {
+          card.hidden = false;
+        } else if (filter === "selected") {
+          card.hidden = card.dataset.selected !== "true";
+        } else {
+          card.hidden = !views.includes(filter ?? "");
+        }
+
+        // 点击卡片图片或标题时，打开对应的项目页面
+        const targetView =
+          filter === "research" || filter === "art-show"
+            ? filter
+            : card.dataset.defaultView;
+
+        if (card.dataset.slug && targetView) {
+          card
+            .querySelectorAll<HTMLAnchorElement>("[data-primary-link]")
+            .forEach((link) => {
+              link.href = `/project/${card.dataset.slug}/${targetView}/`;
+            });
+        }
+      });
+    });
+  });
+</script>

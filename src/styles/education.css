@@ -1,0 +1,55 @@
+.info-education {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #000000;
+}
+
+.info-education h2 {
+  margin: 0 0 20px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.info-education-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
+}
+
+.info-education-item p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.info-degree {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.info-school,
+.info-date {
+  font-size: 14px;
+  color: #000000;
+}
+
+.info-school {
+  margin-top: 4px;
+}
+
+.info-date {
+  margin-top: 2px;
+}
+
+.info-education {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.info-education-item .info-education-extra {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #000000;
+}

@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/info.css";
+import { Image } from "astro:assets";
+import portrait from "../assets/images/photo_info.png";
+
+import NewsPanel from "../components/NewsPanel.astro";
+import InfoRecordSection from "../components/InfoRecordSection.astro";
+
+
+import {
+  scholarProfileUrl,
+  publications,
+  education,
+  teaching,
+  press,
+} from "../data/info-records";
+---
+
+<BaseLayout title="Info" active="info">
+  <section class="info-page">
+    <aside class="info-sidebar">
+      <div class="info-portrait">
+        <Image src={portrait} alt="Portrait of Xingyu Li" width={600} />
+      </div>
+
+    <a class="info-cv-link" href="/cv.pdf">
+      <span class="info-cv-marker" aria-hidden="true">
+        <svg viewBox="0 0 12 16" width="12" height="15" fill="none">
+          <path
+            d="M6 1v9m-3-3 3 3 3-3M2 14h8"
+            stroke="currentColor"
+            stroke-width="1.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+      <span class="info-cv-label">View CV ↗</span>
+    </a>
+
+      <NewsPanel />
+    </aside>
+
+    <div class="info-content">
+      <div class="info-bio">
+          <p>
+            I am advised by <a href="https://richmondywong.com/">Dr. Richmond Wong</a> and <a href="https://nourahowell.com/">Dr. Noura Howell</a>. 
+            My committee also includes <a href="https://research.gatech.edu/brian-magerko">Dr. Brian Magerko</a> and <a href="https://www.heidibiggsdesign.com/">Dr. Heidi Biggs</a>. 
+            I am a member of the <a href="https://sites.gatech.edu/futurefeelings/">Future Feelings lab</a>. 
+            My background spans materials science, computer science, art, product design, and manufacturing. 
+            I have worked as a mechanical engineer, UX designer, and product designer in the UK and China.
+        </p>
+      </div>
+
+      <InfoRecordSection
+        title="Publications"
+        groups={publications}
+        profileUrl={scholarProfileUrl}
+        variant="publications"
+      />
+      <InfoRecordSection
+        title="Education"
+        groups={education}
+        variant="education"
+      />
+
+      <InfoRecordSection title="Teaching" groups={teaching} variant="teaching" />
+      <InfoRecordSection title="Press" groups={press} variant="press" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,100 @@
+.site-header {
+  width: calc(100% - 40px);
+  max-width: 1120px;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+}
+
+.site-header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header > a {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.site-home-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  min-height: 60px;
+}
+
+.site-home-icon svg {
+  display: block;
+  width: 80px;
+  height: 60px;
+}
+
+.site-home-icon:hover,
+.site-home-icon:focus-visible {
+  color: var(--iris-100, #5d5fef);
+}
+
+.site-dino-head-front {
+  display: none;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-head-side {
+  display: none;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-head-front {
+  display: inline;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-stars {
+  fill: #eab308;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-stars path {
+  animation: site-star-twinkle 1.2s steps(2, end) infinite;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-stars path:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.site-home-icon:is(:hover, :focus-visible) .site-dino-stars path:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes site-star-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-home-icon:is(:hover, :focus-visible) .site-dino-stars path {
+    animation: none;
+  }
+}
+
+.site-nav {
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 400;
+  display: flex;
+  gap: 70px;
+}
+
+.site-nav a,
+.site-nav a:visited {
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.site-nav a[aria-current="page"],
+.site-nav a[aria-current="page"]:visited {
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}

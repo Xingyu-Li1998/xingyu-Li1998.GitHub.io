@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import { vulnerableValueGallery } from "../data/project-items/vulnerable-value.ts";
+import "../styles/vulnerable-value-gallery.css";
+
+---
+
+<div class="vv-gallery" aria-label="Vulnerable Value gallery">
+  {vulnerableValueGallery.map((section) =>
+    section.layout === "full" ? (
+      <figure class="vv-gallery-full">
+        <Image
+          src={section.photo.src}
+          alt={section.photo.alt}
+          loading="lazy"
+        />
+        {section.photo.caption && (
+          <figcaption>{section.photo.caption}</figcaption>
+        )}
+      </figure>
+    ) : section.layout === "pair" ? (
+      <div class="vv-gallery-pair">
+        {section.photos.map((photo) => (
+          <figure>
+            {typeof photo.src === "string" ? (
+              photo.src ? (
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+              ) : (
+                <div class="vv-gallery-placeholder" role="img" aria-label={photo.alt} />
+              )
+            ) : (
+              <Image src={photo.src} alt={photo.alt} loading="lazy" />
+            )}
+            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <div class="vv-gallery-six">
+        {section.photos.map((photo) => (
+          <figure>
+            <Image src={photo.src} alt={photo.alt} loading="lazy" />
+            {photo.caption && <figcaption>{photo.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    )
+  )}
+</div>

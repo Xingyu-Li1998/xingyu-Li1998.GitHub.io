@@ -1,0 +1,42 @@
+---
+import "../styles/header.css";
+interface Props {
+  siteName: string;
+  active: "project" | "info";
+}
+
+const { siteName, active } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="site-home-icon" href="/" aria-label={`${siteName} — Home`}>
+    <svg viewBox="0 0 64 48" aria-hidden="true" shape-rendering="crispEdges">
+      <g fill="currentColor">
+        <path d="M28 28h4v3h5v3h-3v-1h-2v3h3v3h-3v3h8v3H18v-3h-6v-3H8v-3H5v-6h3v3h4v3h7v-6h5v-6h4z" />
+        <g class="site-dino-head-side">
+          <path d="M28 17h12v3h3v8H28z" />
+          <path fill="white" d="M35 19h3v3h-3z" />
+        </g>
+        <g class="site-dino-head-front">
+          <path d="M25 17h12v3h3v8H25v-3h-3v-5h3z" />
+          <path fill="white" d="M25 20h3v3h-3zM34 20h3v3h-3zM28 26h6v1h-6z" />
+        </g>
+        <g class="site-dino-stars">
+          <path d="M37 3h3v3h3v3h-3v3h-3V9h-3V6h3z" />
+          <path d="M53 13h3v3h3v3h-3v3h-3v-3h-3v-3h3z" />
+          <path d="M22 7h2v2h2v2h-2v2h-2v-2h-2V9h2z" />
+        </g>
+      </g>
+      <path fill="white" d="M26 37h3v5h-3z" />
+    </svg>
+  </a>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" aria-current={active === "project" ? "page" : undefined}>
+      PROJECT
+    </a>
+    <a href="/info/" aria-current={active === "info" ? "page" : undefined}>
+      INFO
+    </a>
+  </nav>
+</header>

@@ -1,0 +1,219 @@
+.info-record-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.info-record-heading h2,
+.info-record-heading-title h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.info-record-heading > a,
+.info-record-group a {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.info-record-heading > a {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.info-record-heading a:hover,
+.info-record-heading a:focus-visible,
+.info-record-group a:hover,
+.info-record-group a:focus-visible {
+  color: var(--iris-100, #5d5fef);
+}
+
+.info-record-groups {
+  display: grid;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.info-record-group {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.info-record-group h3 {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.info-record-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.info-record-group li {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.info-record-detail {
+  margin-top: 4px;
+  color: #494949;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.info-record-section--publications .info-record-group h3::before,
+.info-record-section--publications .info-record-group h3::after {
+  content: none;
+}
+
+.info-record-section--publications .info-record-group h3 {
+  font-size: 17px;
+  color: #000000;
+}
+
+.info-record-section--publications .info-record-group {
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 15px;
+}
+
+.info-record-heading > .info-profile-link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  color: #111;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.info-profile-marker {
+  display: inline-grid;
+  grid-template-columns: 8px 12px 8px;
+  align-items: center;
+  justify-items: center;
+  width: 28px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.info-profile-marker::before {
+  content: "[";
+}
+
+.info-profile-marker::after {
+  content: "]";
+}
+
+.info-profile-label {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.info-profile-link,
+.info-profile-link:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #111;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.info-profile-link:hover,
+.info-profile-link:focus-visible {
+  color: var(--iris-100, #5d5fef);
+}
+
+.info-record-section--education .info-record-group {
+  display: block;
+}
+
+.info-record-section--education .info-record-main {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.info-record-section--education .info-education-period {
+  color: #030303;
+  font-size: 15px;
+  font-weight: 400;
+}
+/* 三个 timeline 栏目共用的年份布局 */
+.info-record-section--timeline .info-record-group {
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 8px;
+}
+
+.info-record-section--timeline .info-record-group h3 {
+  color: #111;
+  font-size: 17px;
+}
+
+.info-record-section--timeline .info-record-group h3::before,
+.info-record-section--timeline .info-record-group h3::after {
+  content: none;
+}
+
+.info-status-legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: #888;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.info-record-section--teaching .info-record-group li,
+.info-record-section--press .info-record-group li {
+  padding-left: 34px;
+}
+
+:is(.info-record-section--teaching, .info-record-section--press)
+  .info-record-group li::before {
+  content: "";
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  transform: none;
+  color: #111;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+:is(.info-record-section--teaching, .info-record-section--press)
+  .info-record-group li[data-status="finished"]::before {
+  content: "[●]";
+}
+
+.info-record-section--teaching
+  .info-record-group li[data-status="ongoing"]::before,
+.info-record-section--press
+  .info-record-group li[data-status="coming"]::before {
+  content: "[○]";
+}
+@media (max-width: 700px) {
+  .info-record-section--timeline .info-record-group {
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+  }
+}

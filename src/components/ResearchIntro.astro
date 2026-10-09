@@ -1,0 +1,15 @@
+---
+import {Image} from "astro:assets";
+import introImage from "../assets/images/cover_page1.png";
+
+---
+
+<section class="research-intro" aria-label="Research introduction">
+  <div class="research-intro-image">
+    <Image src={introImage} alt="Self-drawing" width={320} />
+  </div>
+
+  <div class="research-intro-text">
+    <slot />
+  </div>
+</section>

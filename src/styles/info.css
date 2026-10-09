@@ -1,0 +1,220 @@
+.info-page {
+  width: calc(100% - 48px);
+  max-width: 1060px;
+  margin: 130px auto 100px;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 100px;
+  align-items: start;
+}
+
+.info-portrait {
+  width: 280px;
+  height: 280px;
+  display: grid;
+  place-items: center;
+    border: 1px solid #111;
+  box-sizing: border-box;
+}
+
+.info-content h1 {
+  margin: 0 0 32px;
+  font-size: 28px;
+}
+
+.info-content p {
+  margin: 0 0 32px;
+  line-height: 1.8;
+}
+
+.info-portrait {
+  overflow: hidden;
+}
+
+.info-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 700px) {
+  .info-page {
+    margin-top: 60px;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.info-sidebar {
+  width: 280px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.info-content {
+  min-width: 0;
+}
+
+.info-bio p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.info-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.info-bio strong {
+  color: var(--iris-100, #5d5fef);
+}
+
+.info-bio a,
+.info-cv-link {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.info-bio a:hover,
+.info-bio a:focus-visible,
+.info-cv-link:hover,
+.info-cv-link:focus-visible {
+  color: var(--iris-100, #5d5fef);
+}
+
+.info-cv-link {
+  margin: 24px 0 28px;
+  font-size: 15px;
+}
+
+.info-content > .info-record-section,
+.info-content > .info-education {
+  margin-top: 56px;
+}
+
+.info-content > .info-education {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.info-content > .info-education h2 {
+  font-size: 16px;
+}
+
+.info-cv-link {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  color: #111;
+  text-decoration: none;
+}
+
+.info-cv-marker {
+  display: inline-grid;
+  grid-template-columns: 8px 12px 8px;
+  align-items: center;
+  justify-items: center;
+  width: 28px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1;
+}
+.info-cv-marker svg {
+  display: block;
+}
+
+.info-cv-marker::before {
+  content: "[";
+  font-size: 18px;
+}
+
+.info-cv-marker::after {
+  content: "]";
+  font-size: 18px;
+}
+
+.info-cv-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 700;
+}
+
+.info-cv-link:hover,
+.info-cv-link:focus-visible {
+  color: var(--iris-100, #5d5fef);
+}
+
+.info-record-section--timeline .info-record-group h3::before {
+  content: "[";
+}
+
+.info-record-section--timeline .info-record-group h3::after {
+  content: "]";
+}
+
+.info-record-section--timeline .info-record-group li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.info-record-section--timeline .info-record-group li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+/* 所有栏目中的年份改为黑色 */
+.info-record-group h3 {
+  color: #111;
+}
+
+.info-record-heading-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.info-publication-legend {
+  color: #888;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* Publications 使用 [●] / [○]，覆盖 timeline 的普通圆点 */
+.info-record-section--publications .info-record-group li {
+  padding-left: 34px;
+}
+
+.info-record-section--publications .info-record-group li::before {
+  top: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  transform: none;
+  color: #111;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.info-record-section--publications
+  .info-record-group li[data-status="published"]::before {
+  content: "[●]";
+}
+
+.info-record-section--publications
+  .info-record-group li[data-status="in-progress"]::before {
+  content: "[○]";
+}

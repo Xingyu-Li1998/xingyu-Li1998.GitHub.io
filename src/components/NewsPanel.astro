@@ -1,0 +1,31 @@
+---
+import { news } from "../data/news";
+import "../styles/news.css";
+
+interface Props {
+  full?: boolean;
+}
+
+const { full = false } = Astro.props;
+const visibleNews = full ? news : news.slice(0, 3);
+---
+
+<section class={full ? "news-panel news-panel--full" : "news-panel"}>
+  <div class="news-panel-header">
+    {full ? <h1>News</h1> : <h2>News</h2>}
+    {!full && <a href="/news/">MORE</a>}
+  </div>
+
+  <ul class="news-list">
+    {visibleNews.map((item) => (
+      <li>
+        <span class="news-date">{item.date}</span>
+        {item.url ? (
+          <a href={item.url}>{item.text}</a>
+        ) : (
+          <span>{item.text}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>

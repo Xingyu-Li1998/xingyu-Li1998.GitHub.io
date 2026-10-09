@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NewsPanel from "../components/NewsPanel.astro";
+---
+
+<BaseLayout title="News" active="info">
+  <div class="news-page">
+    <a class="news-page-back" href="/info/">← Info</a>
+    <NewsPanel full />
+  </div>
+</BaseLayout>

@@ -1,0 +1,51 @@
+.project-filter {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  width: calc(100% - 40px);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px 0 22px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 28px;
+  background: #fff;
+}
+
+.project-filter button {
+  padding: 0 3px 5px;
+  border: 0;
+  background: none;
+  color: #aaa;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.project-filter button[aria-pressed="true"] {
+  color: #111;
+  border-bottom: 1px solid #111;
+}
+
+.project-card[hidden] {
+  display: none;
+}
+
+.project-filter::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 100vw;
+  height: 48px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}

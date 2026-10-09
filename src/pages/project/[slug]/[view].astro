@@ -1,0 +1,150 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import VulnerableValueGallery from "../../../components/VulnerableValueGallery.astro";
+import WorkInProgress from "../../../components/WorkInProgress.astro";
+import "../../../styles/project-detail.css";
+import {
+  projects,
+  type Project,
+  type ProjectView,
+} from "../../../data/projects";
+
+interface Props {
+  project: Project;
+  view: ProjectView;
+}
+
+export function getStaticPaths() {
+  return projects.flatMap((project) => {
+    const views: ProjectView[] = [];
+
+    if (project.views.research) views.push("research");
+    if (project.views["art-show"]) views.push("art-show");
+
+    return views.map((view) => ({
+      params: { slug: project.slug, view },
+      props: { project, view },
+    }));
+  });
+}
+
+const { project, view } = Astro.props;
+const detail = project.views[view];
+
+if (!detail) {
+  throw new Error(`项目 ${project.slug} 没有 ${view} 页面`);
+}
+
+const detailUrl = (targetView: ProjectView) =>
+  `/project/${project.slug}/${targetView}/`;
+const paperUrl = project.views.research?.outcomeNotes?.find((note) => note.url)?.url;
+---
+
+<BaseLayout title={project.title} active="project">
+  <article class="project-detail">
+
+  <div class="project-detail-heading">
+    <h1>{project.title}</h1>
+
+    <nav aria-label="Project views">
+      {project.views.research && (
+        <a
+          href={detailUrl("research")}
+          aria-current={view === "research" ? "page" : undefined}
+        >
+          Research
+        </a>
+      )}
+
+      {project.views["art-show"] && (
+        <a
+          href={detailUrl("art-show")}
+          aria-current={view === "art-show" ? "page" : undefined}
+        >
+          Art Show
+        </a>
+      )}
+    </nav>
+  </div>
+
+    {project.workInProgress ? (
+      <WorkInProgress paperUrl={paperUrl} />
+    ) : (
+    <>
+    <div class="project-detail-body">
+      <div class="project-detail-image">
+        {detail.videoEmbedUrl ? (
+          <iframe
+            src={detail.videoEmbedUrl}
+            title={`${project.title} exhibition video`}
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        ) : detail.images?.[0] ? (
+          <Image
+            src={detail.images[0]}
+            alt={`${project.title} 项目图片`}
+            width={1200}
+          />
+        ) : (
+          <div class="project-detail-placeholder">Project image</div>
+        )}
+      </div>
+      
+      <div class:list={["project-detail-text", { "vv-detail-text": project.slug === "vulnerable-value" }]}>
+        {view === "research" ? (
+          <>
+            {detail.people && <p>People: {detail.people}</p>}
+            {detail.activities && <p>Activities: {detail.activities}</p>}
+          </>
+        ) : (
+          <>
+            {detail.people && (
+              <div class="project-detail-credits">
+                {detail.people
+                  .split(/\r?\n/)
+                  .map((line) => line.trim())
+                  .filter(Boolean)
+                  .map((line) => {
+                    const separator = line.indexOf(":");
+                    return (
+                      <p>
+                        {separator >= 0 ? (
+                          <><span class="project-detail-label">{line.slice(0, separator + 1)}</span>{line.slice(separator + 1)}</>
+                        ) : line}
+                      </p>
+                    );
+                  })}
+              </div>
+            )}
+
+            {detail.date && <p><span class="project-detail-label">Date:</span> {detail.date}</p>}
+            {detail.location && <p><span class="project-detail-label">Location:</span> {detail.location}</p>}
+          </>
+        )}
+
+        <p><span class="project-detail-label">Description:</span> {detail.description}</p>
+
+        {detail.links?.map((link) => (
+          <p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer">
+              {link.label} ↗
+            </a>
+          </p>
+        ))}
+      </div>
+
+    </div>
+      {project.slug === "vulnerable-value" && view === "art-show" && (
+        <VulnerableValueGallery />
+      )}
+    </>
+    )}
+      <a class="project-detail-return" href="/">
+        <span class="project-detail-return-marker" aria-hidden="true">←</span>
+        <span class="project-detail-return-label">Return to Projects</span>
+      </a>
+  </article>
+</BaseLayout>

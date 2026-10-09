@@ -1,11 +1,56 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import '../styles/global.css';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResearchIntro from "../components/ResearchIntro.astro";
+import "../styles/research-intro.css";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+import "../styles/project-card.css";
+import ProjectFilter from "../components/ProjectFilter.astro";
+import "../styles/project-filter.css";
+const siteName = "Xingyu Li";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="en">
+<BaseLayout title="Projects" active="project">
+  <!-- <ResearchIntro>
+  <strong >Xingyu Li</strong> is a design researcher and artist pursuing her fourth-year-PhD in Georgia Tech’s
+  <a href="https://dm.lmc.gatech.edu/">Digital Media</a>
+  program. Her work explores how art and design can create spaces for people to shape ethics. 
+  She focuses on how ethical perspectives emerge through embodied and affective encounters with inferential 
+  biosensing technologies.
+
+  Her work draws on critical and embodied HCI and STS, and is broadly situated within design research. 
+  She uses artistic and participatory forms of engagement alongside qualitative methods. 
+  Her research often takes place through community workshops and art exhibitions.
+
+  </ResearchIntro> -->
+  <ResearchIntro>
+  <!-- <p>
+  <strong >Xingyu Li</strong> (She/her) is a design researcher and artist pursuing her fourth-year-PhD in Georgia Tech’s
+  <a href="https://dm.lmc.gatech.edu/"> Digital Media</a> program. 
+  Her research explores how art and design create conditions for ethical inquiry through embodied and affective encounters with technologies. 
+  She creates spaces for situated ethical inquiry into human–technology relations.</p>
+  <p> -->
+  <p>
+  <strong >Xingyu Li</strong> <span class="research-intro-chinese-name" lang="zh-Hans">李星谕</span> (She/her) is a design researcher and artist pursuing her fourth-year-PhD in Georgia Tech’s
+  <a href="https://dm.lmc.gatech.edu/"> Digital Media</a> program. 
+  Her research explores how art and design create conditions for people to shape what ethics means through embodied and affective encounters with technology. 
+  She creates spaces where people can explore their relationships with technology, reflect on their experiences, and share their thoughts and feelings.</p>
+  <p>
+  Xingyu Li's work in HCI is situated in design research and informed by postphenomenology and feminist epistemology. 
+  She combines aesthetic inquiry and socially engaged art with qualitative research methods, often working through community workshops and art exhibitions.
+  </p>
+  </ResearchIntro>
+  <!-- <ResearchIntro statement="Xingyu Li is a design researcher and artist, currently
+  a fourth-year student at Digital Media at Georgia Tech. Her work explores how to create participatory conditions for people to
+  shape their ethics means of bio-sensing technology through design and art." /> -->
+</BaseLayout>
+<section aria-label="Projects">
+  <ProjectFilter />
+  {projects.map((project) => (
+    <ProjectCard project={project} />
+  ))}
+</section>
+</html>

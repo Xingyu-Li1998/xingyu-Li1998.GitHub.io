@@ -14,6 +14,10 @@ import frontView from "../../assets/images/vulnerable-value/Machine_front.png";
 export const vulnerableValue: Project = {
   slug: "vulnerable-value",
   title: "Vulnerable Value",
+  // Temporary display overrides; remove these three fields to restore the project.
+  cardTitle: "EmoAI Art Show",
+  cardCover: wide01,
+  workInProgress: true,
   selected: true,
   year: "2026-2027",
   collaborators: "Xingyu Li*, Marie Munk*, Adamya Sharma, Noura Howell",

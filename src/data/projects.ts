@@ -22,6 +22,8 @@ export interface ProjectContent {
 export interface Project {
   slug: string;
   title: string;
+  cardTitle?: string;
+  cardCover?: ImageMetadata;
   year: string;
   collaborators: string;
   tags: string[];

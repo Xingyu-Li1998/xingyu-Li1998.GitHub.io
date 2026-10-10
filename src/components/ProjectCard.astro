@@ -10,6 +10,8 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const cardTitle = project.cardTitle ?? project.title;
+const cardCover = project.cardCover ?? project.cover;
 
 const views: ProjectView[] = [];
 if (project.views.research) views.push("research");
@@ -34,11 +36,11 @@ const detailUrl = (view: ProjectView) =>
   <a
     class="project-card-cover"
     href={detailUrl(project.defaultView)}
-    aria-label={`Open ${project.title}`}
+    aria-label={`Open ${cardTitle}`}
     data-primary-link
   >
-    {project.cover ? (
-      <Image src={project.cover} alt={project.title} width={750} />
+    {cardCover ? (
+      <Image src={cardCover} alt={cardTitle} width={750} />
     ) : (
       <span class="project-card-placeholder"></span>
     )}
@@ -48,7 +50,7 @@ const detailUrl = (view: ProjectView) =>
     <div class="project-card-heading">
       <h2>
         <a href={detailUrl(project.defaultView)} data-primary-link>
-          {project.title}
+          {cardTitle}
         </a>
       </h2>
       <span class="project-card-year">{project.year}</span>
